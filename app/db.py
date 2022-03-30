@@ -1,3 +1,4 @@
+# This database module is now using Postgres
 import psycopg2
 
 import click
