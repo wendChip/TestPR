@@ -1,0 +1,60 @@
+html { font-family: sans-serif; }
+body { margin: auto !important; background: white; }
+h1 { font-family: serif; color: #377ba8; margin: 1rem 0; }
+a { color: #377ba8; }
+hr { border: none; border-top: 1px solid lightgray; }
+nav { background: lightgray; align-items: center; padding: 0 0.5rem; }
+nav h2 { letter-spacing: 12px; margin: auto; }
+nav h1 a { text-decoration: none; padding: 0.25rem 0.5rem; }
+nav ul  { list-style: none; margin: 0; padding: 0; }
+nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
+.col-heads { font-size: 1.2rem; color: chocolate; }
+.content { padding: 1rem 1rem; padding-top: 70px; }
+.content > header { border-bottom: 1px solid lightgray; align-items: center; }
+.content > header h1 { margin: 1rem 0 0.25rem 0; }
+.content > header p { font-size: small; margin-top: .1rem; margin-bottom: .1rem; }
+.content > header h4 { letter-spacing: 2px; }
+.flash { margin: 1em 0; padding: 1em; background: #cae6f6; border: 1px solid #377ba8; }
+.post > header { align-items: flex-end; font-size: 0.85em; }
+.post > header > div:first-of-type { flex: auto; }
+.post > header h1 { font-size: 1.5em; margin-bottom: 0; }
+.post .about { color: slategray; font-style: italic; }
+.post .body { white-space: initial; color: #49515a; }
+.content:last-child { margin-bottom: 0; }
+.content form { margin: 1em 0; display: flex; flex-direction: column; }
+.content input, .content textarea { margin-bottom: .55em; }
+.content textarea { min-height: 12em; resize: vertical; }
+.cocktail img { 
+  display: block;
+  border-radius: 1.5rem;
+  border: 5px solid #9c9922;
+  transition: all 0.3s linear;
+  height: 268px;
+  object-fit: cover;  }
+.cocktail > p.ingred { font-size: 1.02rem; font-weight: bold; }
+.db-link { color: #e64c4c; margin: 1.5em; }
+.form-control-sm { min-height: calc(5.5em + 10.5rem + 2px) !important; min-width: calc(1.5em + 8rem + 2px) !important; }
+.category .form-check-input { border-radius: .3em !important; }
+.category .collections { margin-left: .5rem; font-size: .95rem; color: #063060; }
+input.danger { color: #cc2f2e; }
+input[type=submit] { align-self: start; min-width: 10em; }
+.section-center {
+  padding-top: 5px;
+  width: 85vw;
+  margin: auto;
+  max-width: 1200px;
+}
+/* If screen size is greater than 576, display grid (drinks) */
+@media screen and (min-width: 576px) {
+  .section-center {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    column-gap: 2rem;
+  }
+}
+/* Set max width on all pages */
+@media screen and (min-width: 576px) {
+  body {
+    width: 95vw;
+  }
+}

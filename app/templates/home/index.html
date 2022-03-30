@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="text-center container-fluid">
+    <p>(got rando stuff in the kitchen?)</p>
+    <h4 class="mx-2 my-2">{% block title %}Cobble a cocktail{% endblock %}</h4>
+  </div>
+{% endblock %}
+
+{% block content %}
+    <div class="post container-fluid">
+
+      <!-- Begin body -->
+      <div class="body mx-3">
+        <form method="post">
+        
+        <!-- row 1 -->
+	    <div class="row">
+              <div class="col-md-6">
+                <div class="my-2 col-heads">
+                  Boozy
+	        </div>
+	        <!-- repped by dropdown -->
+                <div class="form-group">
+		    <label for="formBooze">--choose main liquor-- <small class="db-link">*required</small></label>
+                    <select name="booze" class="form-control" id="formBooze">
+	              {% for item in booze %}
+                      <option value="{{ item[1] }}">{{ item[1] }}</option>
+	              {% endfor %}
+                    </select>
+                </div>
+	      </div> <!-- col1 -->
+
+              <div class="col-md-6">
+                <div class="my-2 col-heads">
+			Non-boozy <small class="text-muted">(inbound feature...)</small>
+	        </div>
+	          {% for item in boozeless %}
+		    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="boozeless" value="{{ item[1] }}">
+                        <label class="form-check-label" for="{{ item[0] }}">{{ item[1] }}</label>
+                    </div>
+	          {% endfor %}
+	      </div> <!-- col2 -->
+	    </div> <!-- inner row -->
+
+            <hr>
+
+            <!-- rows 'other' section  -->
+	    <!-- [('cat', ['1,ingred1', ...]), ...]-->
+	      {% for category, line in ingreds.items() %}
+	        <div class="category">
+		  <div class="my-2 col-heads">
+			  {{ category }}
+		  </div>
+		  <div class="collections">
+		    {% for item in line %}
+		      <div class="form-check form-check-inline">
+		        <input type="checkbox" class="form-check-input" name="ingred{{ item.split(',')[0] }}" value="{{ item.split(',')[1] }}">
+                        <label class="form-check-label" for="{{ item.split(',')[0] }}">{{ item.split(',')[1] }}</label>
+                      </div>
+	            {% endfor %}
+		  </div>
+		</div>
+	      {% endfor %}
+	    <!-- end other rows -->
+
+            <!-- row for button -->
+	    <div class="row mx-3">
+	        <div class="col text-center">
+	          <input type="submit" class="btn btn-primary" value="Hit Me">
+	        </div>
+	    </div>
+
+        </form>
+      </div> <!-- end d-flex and body -->
+
+    </div> <!-- end post and container-fluid -->
+{% endblock %}
