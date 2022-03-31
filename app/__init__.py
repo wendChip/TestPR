@@ -5,7 +5,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 
-# create rando comment
+
 def create_app(test_config=None):
     """Create and return a Flask app factory object.
 
@@ -23,17 +23,10 @@ def create_app(test_config=None):
     test_config -- the environment (default None)
     """
     app = Flask(__name__, instance_relative_config=True)
-    # Version 1 database
-    #app.config.from_mapping(
-        #DATABASE=os.path.('instance/flask.sqlite'),
-    #)
     app.config.from_mapping(
         API_KEY=os.environ.get('API_KEY'),
         SECRET_KEY=os.environ.get('SECRET_KEY'),
-        HOST=os.environ.get('HOST'),
-        DATABASE=os.environ.get('DATABASE'),
-        USER=os.environ.get('PG_USER'),
-        PSWD=os.environ.get('PG_PSWD')
+        DATABASE=os.path.join(app.instance_path, 'flask.sqlite'),
     )
 
     # Load configs from classes within config.py if exists,

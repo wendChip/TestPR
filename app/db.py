@@ -1,5 +1,4 @@
-# This database module is now using Postgres
-import psycopg2
+import sqlite3
 
 import click
 from flask import current_app, g
@@ -8,14 +7,9 @@ from flask.cli import with_appcontext
 
 def init_db():
     db = get_db()
-    cursor = db.cursor()
 
     with current_app.open_resource('schema.sql') as f:
-        cursor.execute(f.read())
-
-    db.commit()
-    cursor.close()
-    db.close()
+        db.executescript(f.read().decode('utf8'))
 
 
 @click.command('init-db')
@@ -29,12 +23,11 @@ def init_db_command():
 def get_db():
     """Store database connection object in 'g' if not present."""
     if 'db' not in g:
-        g.db = psycopg2.connect(
-            host=current_app.config['HOST'],
-            database=current_app.config['DATABASE'],
-            user=current_app.config['USER'],
-            password=current_app.config['PSWD']
+        g.db = sqlite3.connect(
+            current_app.config['DATABASE'],
+            detect_types=sqlite3.PARSE_DECLTYPES
         )
+        g.db.row_factory = sqlite3.Row
 
     return g.db
 
