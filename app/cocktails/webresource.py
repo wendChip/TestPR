@@ -25,7 +25,7 @@ class HTTPSync:
 class HTTPAsync:
 
     async def fetch(self, url: str, session: ClientSession, **kwargs):
-        response = await session.request(method="GET", url = url, **kwargs)
+        response = await session.request(method="GET", url=url, **kwargs)
         response.raise_for_status()
         data = await response.json()
         return data
@@ -41,8 +41,9 @@ class HTTPAsync:
         return data
 
     async def single(self, url: str, res_list: list, **kwargs):
-        result = await self.parse(url, **kwargs) # session buried
-        if not result: return None
+        result = await self.parse(url, **kwargs)
+        if not result:
+            return None
         res_list.append(result)
 
     async def bulk_get(self, urls: set, res: list):

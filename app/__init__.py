@@ -5,7 +5,6 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 
-
 def create_app(test_config=None):
     """Create and return a Flask app factory object.
 

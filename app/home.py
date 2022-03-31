@@ -16,15 +16,16 @@ URL_IG = "https://www.thecocktaildb.com/api/json/v2/KEY/filter.php?i="
 URL_ID = "https://www.thecocktaildb.com/api/json/v2/KEY/lookup.php?i="
 
 
-
 @bp.route('/', methods=('GET', 'POST'))
 def index():
-    """This main page view retrieves 3 dicts from the sqlite instance.
+    """
+    This main page view retrieves 3 dicts from the sqlite instance.
     The selection options require only an alcohol type to be chosen.
     Future releases will take a strict alcohol or non-alcohol type. 
     Ingredients are optional.
     """
-    if request.method == 'GET': log_client(request)
+    if request.method == 'GET':
+        log_client(request)
 
     # Database fetch
     db = get_db()
@@ -47,13 +48,13 @@ def index():
     # Form request
     if request.method == 'POST':
         alcohol = request.form['booze']
-        #non_alcohol = request.form['boozeless']
-        ingredients = [v for k,v in request.form.items() if k.startswith('ingred')]
+        # non_alcohol = request.form['boozeless']
+        ingredients = [v for k, v in request.form.items() if k.startswith('ingred')]
         error = None
 
         # TODO: if alcohol and non_alcohol:
-            # flash('Please be boozy ... or eazy-classy.')
-            # return redirect(url_for('index'))
+        # flash('Please be boozy ... or eazy-classy.')
+        # return redirect(url_for('index'))
         # to_taste = alcohol if alcohol else non_alcohol
         to_taste = alcohol
         all_ingredients = [to_taste] + ingredients
@@ -67,9 +68,9 @@ def index():
             return drinks(all_ingredients)
 
     return render_template('home/index.html',
-            booze=booze,
-            boozeless=boozeless,
-            ingreds=ingreds)
+                booze=booze,
+                boozeless=boozeless,
+                ingreds=ingreds)
 
 
 @bp.route('/v1/')
@@ -138,7 +139,7 @@ def drinks(ingredients):
         return register_response(f"No drinks found based on ingredients: {', '.join(ingredients)}")
     else:
         avail_drinks = list()
-        array_ids = [ item['idDrink'] for item in response.json()['drinks']][:20]
+        array_ids = [item['idDrink'] for item in response.json()['drinks']][:20]
         # Asynchronous http call(s) using aiohttp
         url_id = URL_ID.replace('KEY', current_app.config['API_KEY'])
         urls = [url_id + i for i in array_ids]
@@ -153,7 +154,8 @@ def drinks(ingredients):
             for d in results:
                 if isinstance(d, dict) and d['drinks']:
                     avail_drinks += d['drinks']
-                else: current_app.logger.error(f"Error for request from external API: {d}")
+                else:
+                    current_app.logger.error(f"Error for request from external API: {d}")
         current_app.logger.info(f"Number of Avail: {len(avail_drinks)}")
 
     return render_template('home/drinks.html', drinks=avail_drinks)
