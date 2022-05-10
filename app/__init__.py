@@ -28,6 +28,7 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'flask.sqlite'),
     )
 
+    # Insert test comment
     # Load configs from classes within config.py if exists,
     # else load from argument
     if test_config is None:
