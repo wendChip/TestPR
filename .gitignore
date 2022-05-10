@@ -2,3 +2,4 @@ virt/
 __pycache__/
 pytest_cache/
 images.*
+*.json
