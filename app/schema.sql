@@ -1,3 +1,4 @@
+# Sql commands
 DROP TABLE IF EXISTS booze;
 DROP TABLE IF EXISTS boozeless;
 DROP TABLE IF EXISTS drink_other;
