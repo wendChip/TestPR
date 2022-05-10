@@ -4,7 +4,7 @@ import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 
-
+# PR5 test comment, in db
 def init_db():
     db = get_db()
 
